@@ -20,11 +20,12 @@ How to run
 
     cd tcp-option
     make
-    sudo ./test_tcp_user  bpf_tcp_cc_kern.c
+    sudo ./test_tcp_user  bpf_tcp_cc_kern.o
 
-or add ``-q`` to suppress the debug information:
+Be aware to specify the BPF-compiled object (ended with '.o').
+Or add ``-q`` to suppress the debug information:
 
-    sudo ./test_tcp_user  bpf_tcp_cc_kern.c -q
+    sudo ./test_tcp_user  bpf_tcp_cc_kern.o -q
 
 Authors
 -------
