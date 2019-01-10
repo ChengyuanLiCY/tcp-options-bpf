@@ -1,19 +1,33 @@
-Linux kernel
-============
+eBPF support for user-defined TCP options
+=========================================
 
-There are several guides for kernel developers and users. These guides can
-be rendered in a number of formats, like HTML and PDF. Please read
-Documentation/admin-guide/README.rst first.
+This work is based on TCP-BPF framework by Lawrence Brakmo, 
+which is already merged in recent kernels.
 
-In order to build the documentation, use ``make htmldocs`` or
-``make pdfdocs``.  The formatted documentation can also be read online at:
+This is a part of our academic work. For more information, please read our paper:
 
-    https://www.kernel.org/doc/html/latest/
+    https://www.arxiv-vanity.com/papers/1901.01863/
 
-There are various text files in the Documentation/ subdirectory,
-several of them using the Restructured Text markup notation.
-See Documentation/00-INDEX for a list of what is contained in each file.
+The BPF programs and user daemon/script are in the tcp-option/ folder.
 
-Please read the Documentation/process/changes.rst file, as it contains the
-requirements for building and running the kernel, and information about
-the problems which may result by upgrading your kernel.
+- test_tcp_user.c: user daemon to load BPF program and run experiments 
+- my_net*.sh: script to set up the network environment, similar to mininet.
+ We cannot use mininet since it based on cgroup-v1, while tcp-bpf use cgroup-v2.
+- bpf_tcp_*.c: BPF programs.
+
+How to run
+-----------
+
+    cd tcp-option
+    make
+    sudo ./test_tcp_user  bpf_tcp_cc_kern.c
+
+or add ``-q`` to suppress the debug information:
+
+    sudo ./test_tcp_user  bpf_tcp_cc_kern.c -q
+
+Authors
+-------
+
+Viet-Hoang Tran and Olivier Bonaventure.
+@ INL, ICTEAM, UCLouvain.
